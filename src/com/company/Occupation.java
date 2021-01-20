@@ -54,11 +54,9 @@ public class Occupation {
     }
 
     public String toString() {
-        String info;
 
-        return info = "COS: " + COS + "\n Title: " + title + "\n Employment: " + employment
+        return "COS: " + COS + "\n Title: " + title + "\n Employment: " + employment
                 + "\n Salary: " + salary;
-
 
     }
 }
