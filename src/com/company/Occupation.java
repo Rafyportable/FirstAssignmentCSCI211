@@ -4,15 +4,15 @@ public class Occupation {
 
     private String COS;
     private String title;
-    private int employment;
-    private int salary;
+    private String employment;
+    private String salary;
 
+    // constructor method
     public Occupation() {
 
     }
 
-    //Constructor
-    public Occupation(String cos, String ti, int emp, int sal) {
+    public Occupation(String cos, String ti, String emp, String sal) {
 
         setCOS(cos);
         setTitle(ti);
@@ -37,26 +37,26 @@ public class Occupation {
         this.title = title;
     }
 
-    public int getEmployment() {
+    public String getEmployment() {
         return employment;
     }
 
-    public void setEmployment(int employment) {
+    public void setEmployment(String employment) {
         this.employment = employment;
     }
 
-    public int getSalary() {
+    public String getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(String salary) {
         this.salary = salary;
     }
 
     public String toString() {
 
-        return "COS: " + COS + "\n Title: " + title + "\n Employment: " + employment
-                + "\n Salary: " + salary;
+        return "COS: " + COS + "\nTitle: " + title + "\nEmployment: " + employment
+                + "\nSalary: " + salary;
 
     }
 }
