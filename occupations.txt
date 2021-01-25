@@ -3214,4 +3214,3 @@ Tank Car, Truck, and Ship Loaders
 Material Moving Workers, All Other
 27,010
 35,000
-
