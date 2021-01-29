@@ -1,15 +1,18 @@
 package com.company;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class OccupationList {
 
-    public void loadArray(Occupation[] occ) throws Exception {
+    private String fromEmployment;
+    private String fromSalary;
+    private int toEmployment;
+    private int toSalary;
 
-        String inCOS;
-        String inTitle;
-        String inEmployment;
-        String inSalary;
+    public void loadArray(Occupation[] occ) throws Exception {
 
         java.io.File occFile = new java.io.File("occupations.txt");
 
@@ -17,21 +20,24 @@ public class OccupationList {
 
         for (int i = 0; i < 803; i++){
 
-            inCOS = inFile.nextLine();
-            inTitle = inFile.nextLine();
-            inEmployment = inFile.nextLine();
-            inSalary = inFile.nextLine();
+            String inCOS = inFile.nextLine();
+            String inTitle = inFile.nextLine();
 
-            occ[i] = new Occupation(inCOS, inTitle, inEmployment, inSalary);
+            //Updated employee variable from String to Integer
+            fromEmployment = inFile.nextLine();
+            fromEmployment = fromEmployment.replaceAll(",", "");
+            toEmployment = Integer.parseInt(fromEmployment);
+
+            //Updated salary variable from String to Integer
+            fromSalary = inFile.nextLine();
+            fromSalary = fromSalary.replaceAll(",", "");
+            toSalary = Integer.parseInt(fromSalary);
+
+            occ[i] = new Occupation(inCOS, inTitle, toEmployment, toSalary);
 
         }
 
         inFile.close();
-
-        for (int j = 0; j < 803; j++){
-            System.out.println(occ[j].toString());
-
-        }
 
     }
 
@@ -43,12 +49,6 @@ public class OccupationList {
 
         loadArray(amount);
 
-        for (int i = 0; i < 803; i++) {
-
-            System.out.println(amount[i].toString());
-
-        }
-
         System.out.println("Please type the Standard Occupational Classification (SOC): ");
 
         String answer = write.next();
@@ -57,16 +57,79 @@ public class OccupationList {
 
             if (amount[j].toString().contains(answer)){
 
-                System.out.println("It is a match");
+                System.out.println("\nIt is a match!\nHere's what we found: \n");
+                System.out.println(amount[j].toString());
+                break;
 
             } else {
 
-                System.out.println("Sorry it seems there's no match for the SOC");
+                System.out.println("Nope not this one");
 
             }
+        }
+    }
+
+    public void totalOccupation() throws Exception {
+
+        int total = 0;
+        java.io.File occFile = new java.io.File("occupations.txt");
+
+        Scanner inFile = new Scanner(occFile);
+
+        for (int i = 1; i < 805; i++){
+
+            inFile.nextLine();
+            inFile.nextLine();
+
+            fromEmployment = inFile.nextLine();
+            fromEmployment = fromEmployment.replaceAll(",", "");
+            toEmployment = Integer.parseInt(fromEmployment);
+            total += toEmployment;
+
+            inFile.nextLine();
 
         }
 
+        inFile.close();
+        System.out.println(total);
     }
 
+    public void avgSalary() throws Exception {
+
+        int total = 0;
+
+        java.io.File occFile = new java.io.File("occupations.txt");
+        Scanner inFile = new Scanner(occFile);
+
+        for (int i = 1; i < 805; i++){
+
+            inFile.nextLine();
+            inFile.nextLine();
+            inFile.nextLine();
+
+            fromSalary = inFile.nextLine();
+            fromSalary = fromSalary.replaceAll(",", "");
+            toSalary = Integer.parseInt(fromSalary);
+            total += toSalary;
+
+        }
+
+        int Average = total / 804;
+
+        inFile.close();
+
+        System.out.println(Average);
+
+    }
+
+    public void print() throws IOException {
+
+        //This code is based on StackOverflow, answered by Jiri Kremser, edited by Harshal Parekh
+        try (BufferedReader br = new BufferedReader(new FileReader("occupations.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+        }
+    }
 }
